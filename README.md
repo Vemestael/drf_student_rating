@@ -34,7 +34,7 @@ This project provides you a working Django environment without requiring you to 
     $ docker-compose run django python manage.py collectstatic
     ```
 
-8. You've done! Main page is available on http://localhost, phpMyAdmin - http://localhost:3309
+8. You've done! Main page is available on http://localhost
 
 9. After finishing work, you can stop running containers:
     ```sh
