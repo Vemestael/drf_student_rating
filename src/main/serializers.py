@@ -1,39 +1,51 @@
-from rest_framework import serializers
+from rest_framework.serializers import HyperlinkedModelSerializer
 
 import main.models as models
 
 
-class FacultySerializer(serializers.HyperlinkedModelSerializer):
+class FacultySerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.Faculty
         fields = '__all__'
 
 
-class RatingSerializer(serializers.HyperlinkedModelSerializer):
+class StudyGroupSerializer(HyperlinkedModelSerializer):
+    class Meta:
+        model = models.StudyGroup
+        fields = '__all__'
+
+
+class ExamSessionSerializer(HyperlinkedModelSerializer):
+    class Meta:
+        model = models.ExamSession
+        fields = '__all__'
+
+
+class RatingSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.Rating
         fields = '__all__'
 
 
-class ExtraPointSerializer(serializers.ModelSerializer):
+class ExtraPointSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.ExtraPoint
         fields = '__all__'
 
 
-class InviteKeySerializer(serializers.HyperlinkedModelSerializer):
+class InviteKeySerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.InviteKey
         fields = '__all__'
 
 
-class ExcelFileSerializer(serializers.HyperlinkedModelSerializer):
+class ExcelFileSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.ExcelFile
         fields = '__all__'
 
 
-class CertificateSerializer(serializers.HyperlinkedModelSerializer):
+class CertificateSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = models.Certificate
         fields = '__all__'

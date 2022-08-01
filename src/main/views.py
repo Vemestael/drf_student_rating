@@ -10,6 +10,16 @@ class FacultyAPI(ModelViewSet):
     serializer_class = serializers.FacultySerializer
 
 
+class StudyGroupAPI(ModelViewSet):
+    queryset = models.StudyGroup.objects.all()
+    serializer_class = serializers.StudyGroupSerializer
+
+
+class ExamSessionAPI(ModelViewSet):
+    queryset = models.ExamSession.objects.all()
+    serializer_class = serializers.ExamSessionSerializer
+
+
 class RatingAPI(ModelViewSet):
     queryset = models.Rating.objects.all()
     serializer_class = serializers.RatingSerializer
