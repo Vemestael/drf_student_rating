@@ -11,7 +11,7 @@ services:
     volumes:
       - ./src:/var/www/html
     depends_on:
-      - mysql
+      - postgres
     networks:
       - app-network
 
@@ -24,43 +24,28 @@ services:
       - "80:80"
     depends_on:
       - django
-      - mysql
+      - postgres
     volumes:
       - ./src:/var/www/html
     networks:
       - app-network
 
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
+  postgres:
+    image: postgres:latest
+    container_name: postgres
     restart: unless-stopped
     tty: true
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      MYSQL_DATABASE: student_rating
-      MYSQL_ROOT_PASSWORD: root
+      POSTGRES_DB: student_rating
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
-      - ./mysql:/var/lib/mysql
-    networks:
-      - app-network
-
-  phpmyadmin:
-    image: phpmyadmin:latest
-    container_name: phpmyadmin
-    environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-    ports:
-      - "3309:80"
-    depends_on:
-      - mysql
+      - ./data/db:/var/lib/postgresql/data
     networks:
       - app-network
 
 networks:
   app-network:
     driver: bridge
-
-volumes:
-    static_volume:
