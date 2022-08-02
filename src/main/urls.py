@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework import routers
 
 from main import views
@@ -15,5 +15,6 @@ router.register(r'certificate', views.CertificateAPI)
 
 urlpatterns = [
     path('login', views.Login.as_view(), name='login'),
+    path("api-auth/", include("rest_framework.urls")),
 ]
 urlpatterns += router.urls
