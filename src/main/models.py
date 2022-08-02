@@ -49,9 +49,9 @@ class Rating(models.Model):
     full_name = models.CharField(max_length=255, help_text="Student's full name")
     avg_score = models.FloatField(help_text="The average score of the student "
                                             "at the end of the semester and examination session")
-    extra_score = models.IntegerField(help_text="Student points for additional activity")
+    extra_score = models.IntegerField(help_text="Student points for additional activity", blank=True)
     total_score = models.FloatField()
-    scholarship = models.IntegerField()
+    scholarship = models.IntegerField(blank=True)
 
     class Meta:
         ordering = ["-total_score"]
@@ -69,7 +69,7 @@ class ExtraPoint(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=True)
     point = models.IntegerField()
     description = models.TextField(help_text="A description of the activity for which points were received")
-    certificate = models.FileField(upload_to="certificate")
+    certificate = models.FileField(upload_to="certificate", blank=True)
 
     def __str__(self):
         return f'{self.student_id} {self.point}'
