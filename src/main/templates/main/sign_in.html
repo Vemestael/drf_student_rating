@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <div class="mt-4">{% if form.errors %}Please enter a correct username and password{% endif %}</div>
+        <!-- Login Form -->
+        <form class="mt-4" method="POST">
+            {% csrf_token %}
+            {{ form.username }}
+            {{ form.password }}
+            <input type="submit" class="fadeIn third" value="login">
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter" class="fadeIn fourth">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+        <div id="formFooter" class="fadeIn fourth">
+            <a class="underlineHover" href="/sign-up">Sign up</a>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $("#id_username").attr({placeholder: "login", class: "fadeIn first"});
+    $("#id_password").attr({placeholder: "password", class: "fadeIn second"});
+</script>
+</body>
+
+</html>

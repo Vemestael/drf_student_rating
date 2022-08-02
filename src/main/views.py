@@ -1,8 +1,14 @@
+from django.contrib.auth.views import LoginView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 import main.models as models
 import main.serializers as serializers
+
+
+class Login(LoginView):
+    template_name = 'main/sign_in.html'
+    next_page = '/'
 
 
 class FacultyAPI(ModelViewSet):
