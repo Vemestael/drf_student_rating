@@ -301,5 +301,5 @@ fabric.properties
 
 .idea/
 
-mysql
+data
 staticfiles
