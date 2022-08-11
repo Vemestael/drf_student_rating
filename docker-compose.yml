@@ -16,31 +16,21 @@ services:
       - app-network
 
   nginx:
-    build:
-      context: ./Docker/nginx
-    container_name: nginx
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    image: staticfloat/nginx-certbot
     restart: unless-stopped
-    tty: true
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80/tcp
+      - 443:443/tcp
+    environment:
+      CERTBOT_EMAIL: vemestael@gmail.com
+    volumes:
+      - ./conf.d:/etc/nginx/user.conf.d:ro
+      - ./src/:/var/www/html
+      - letsencrypt:/etc/letsencrypt
     depends_on:
       - django
-    volumes:
-      - ./src:/var/www/html
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot 
     networks:
       - app-network
-
-  certbot:
-    image: certbot/certbot:latest
-    restart: unless-stopped
-    volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 5d & wait $${!}; done;'"
 
   postgres:
     image: postgres:latest
@@ -57,6 +47,9 @@ services:
       - ./data/db:/var/lib/postgresql/data
     networks:
       - app-network
+
+values:
+  - letsencrypt:
 
 networks:
   app-network:
